@@ -523,7 +523,7 @@ func main() {
 
 	// Create Gokoban instance and initialize the G3N application
 	g := new(Gokoban)
-	g.Application = app.App(1280, 920, "Gokoban")	
+	g.Application = app.App(1280, 920, "Gokoban", app.WithOptions(app.AppOptions{Headless: true}))
 
 	// Log OpenGL version
 	log.Debug("OpenGL version: %s", g.Gls().GetString(gls.VERSION))
@@ -537,13 +537,13 @@ func main() {
 	g.userData = LoadOrCreateUserData()
 
 	// Change to full screen if user prefers it
-	g.IWindow.(*window.GlfwWindow).SetFullScreen(g.userData.FullScreen)
+	// g.IWindow.(*window.GlfwWindow).SetFullScreen(g.userData.FullScreen)
 
 	// Create main scene and child levelScene
 	g.scene = core.NewNode()
 	g.levelScene = core.NewNode()
 	g.scene.Add(g.levelScene)
-	
+
 	// Set the scene to be managed by the gui manager
 	gui.Manager().Set(g.scene)
 
